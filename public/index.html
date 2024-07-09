@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Short URLs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://jenil.github.io/bulmaswatch/lumen/bulmaswatch.min.css"
+    />
+    <style>
+      ::placeholder {
+        opacity: 0.5; /* Adjust this value to change the opacity */
+      }
+    </style>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <section class="hero is-medium is-primary is-bold">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">Short Url</h1>
+        </div>
+      </div>
+    </section>
+    <main id="app">
+      <form v-if="!success" @submit.prevent="createShortUrl()">
+        <div v-if="error" class="notification is-danger">{{error}}</div>
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">URL</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <p class="control">
+                <input
+                  v-model="originalUrl"
+                  class="input is-large"
+                  type="text"
+                  placeholder="http://localhost:3000/uploadhere"
+                  required
+                />
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">User Id</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <p class="control">
+                <input
+                  v-model="userId"
+                  class="input is-large"
+                  type="text"
+                  placeholder="test"
+                  required
+                />
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">File Id</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <p class="control">
+                <input
+                  v-model="fileId"
+                  class="input is-large"
+                  type="text"
+                  placeholder="test"
+                  required
+                />
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="shorturl-button">
+          <button type="submit" class="button is-large is-success">
+            Generate
+          </button>
+        </div>
+      </form>
+      <h1 v-if="success" class="title is-1" style="text-align: center">
+        <a :href="shortUrl" target="_blank">{{shortUrl}}</a>
+
+        <div class="shorturl-button" style="margin-top: 30px">
+          <button class="button is-large">
+            <a href="/" target="_blank">Home</a>
+          </button>
+        </div>
+      </h1>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
