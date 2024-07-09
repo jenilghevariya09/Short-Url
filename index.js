@@ -9,7 +9,7 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-mongoose.connect('mongodb://localhost/urlShortener', {
+mongoose.connect(`${process.env.DATABASE_URL || 'mongodb://localhost/urlShortener'}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
@@ -83,7 +83,7 @@ app.post('/upload', async (req, res, next) => {
         if (shortUrlDetails.isFileUpload) {
             return res.redirect(`/404.html?name=${encodeURIComponent('File Already Uploaded!')}`);
         }
-        
+
         upload(req, res, async (err) => {
             if (err) {
                 return res.status(400).json({ error: err.message });
